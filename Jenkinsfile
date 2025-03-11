@@ -12,17 +12,17 @@ pipeline {
         string(name: 'TFVARS_KEY', defaultValue: 'networking/terraform.tfvars', description: 'Key của file terraform.tfvars trên S3')
 
     }
-    stage("Setup AWS Credentials") {
-            steps {
-                withCredentials([aws(credentialsId: 'GITHUB-PAT-FULL-ACCESS-3', region: "${region}")]) {  
-                    script {
-                        env.AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
-                        env.AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
-                    }
-                    sh "aws sts get-caller-identity" 
-                }
-            }
-        }
+    // // stage("Setup AWS Credentials") {
+    //         steps {
+    //             withCredentials([aws(credentialsId: 'GITHUB-PAT-FULL-ACCESS-3', region: "${region}")]) {  
+    //                 script {
+    //                     env.AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
+    //                     env.AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
+    //                 }
+    //                 sh "aws sts get-caller-identity" 
+    //             }
+    //         }
+    // }
     stages {
         stage('Checkout') {
             steps {
